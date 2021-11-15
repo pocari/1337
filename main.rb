@@ -12,7 +12,7 @@ FromTo = Struct.new(:from, :to) do
   end
 end
 
-def paren_pattern(n, size, offset = 0, acc = [])
+def paren_pattern(n, size, offset = 0)
   # p [:paren_pattern, n, size, offset]
   if size < 2
     []
