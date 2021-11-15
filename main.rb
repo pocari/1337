@@ -1,5 +1,3 @@
-require 'bigdecimal'
-
 FromTo = Struct.new(:from, :to) do
   def inspect
     "#{from}-#{to}"
