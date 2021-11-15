@@ -21,12 +21,20 @@ def paren_pattern(n, size, offset = 0)
     (offset .. last_index - size + 1).flat_map do |from|
       to = from + size - 1
       ft = FromTo.new(from, to)
+
+      # まずsize子の数字を囲むカッコの位置を確定
+      #  0, 1, 2, 3 に対して
+      # (0, 1, 2), 3 みたいなパターンをここではFromTo.new(0, 2)と表現している
       base1 = [[ft]]
 
+      # 次に、base1の中に入れ子でカッコを入れられる場合のパターンを探す
+      # base1が(0, 1, 2)だとして、 ((0, 1), 2) や (0, (1, 2)) というパターンを探す
       base2 = paren_pattern(size, size - 1, from).map do |pattern|
         [ft, *pattern]
       end
 
+      # 最後に、今確定したbase1より後の部分に関してカッコをいれられるかどうかを確認
+      # base1が(0, 1)だとして、 (2, 3) みたいなパターンを探す
       next_size = last_index - to
       base3 = paren_pattern(next_size, next_size, to + 1).map do |pattern|
         [ft, *pattern]
