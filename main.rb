@@ -38,7 +38,7 @@ def paren_pattern(n, size, offset = 0)
       next_size = last_index - to
       base3 = paren_pattern(next_size, next_size, to + 1).flat_map do |pattern|
         (base1 + base2).map do |b|
-          [*b, *pattern]
+          b + pattern
         end
       end
 
@@ -100,6 +100,7 @@ def main
     expression = nums.zip(ops).flatten.join
     # ZeroDivisionErrorが発生した場合は、無視する
     begin
+      puts expression
       result = eval(expression)
       if result == 10
         puts expression
@@ -109,4 +110,5 @@ def main
   end
 end
 
-main
+# main
+pp paren_pattern_all(5)
