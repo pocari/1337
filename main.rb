@@ -100,7 +100,6 @@ def main
     expression = nums.zip(ops).flatten.join
     # ZeroDivisionErrorが発生した場合は、無視する
     begin
-      puts expression
       result = eval(expression)
       if result == 10
         puts expression
@@ -110,5 +109,5 @@ def main
   end
 end
 
-# main
-pp paren_pattern_all(5)
+main
+#pp paren_pattern_all(5)
