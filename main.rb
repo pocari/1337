@@ -36,8 +36,10 @@ def paren_pattern(n, size, offset = 0)
       # 最後に、今確定したbase1より後の部分に関してカッコをいれられるかどうかを確認
       # base1が(0, 1)だとして、 (2, 3) みたいなパターンを探す
       next_size = last_index - to
-      base3 = paren_pattern(next_size, next_size, to + 1).map do |pattern|
-        [ft, *pattern]
+      base3 = paren_pattern(next_size, next_size, to + 1).flat_map do |pattern|
+        (base1 + base2).map do |b|
+          [*b, *pattern]
+        end
       end
 
       base1 + base2 + base3
